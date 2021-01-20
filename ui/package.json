@@ -48,10 +48,10 @@
     "node-sass": "^4.13.1",
     "prop-types": "^15.6.0",
     "raw-loader": "^0.5.1",
-    "react": "^16.8.3",
+    "react": "^16.9.3",
     "react-autocomplete": "^1.8.1",
     "react-diff-view": "^2.1.4",
-    "react-dom": "^16.8.3",
+    "react-dom": "^16.9.3",
     "react-form": "2.16.0",
     "react-ga": "^2.6.0",
     "react-helmet": "^5.2.0",
@@ -61,6 +61,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.2.2",
     "react-svg-piechart": "^2.1.1",
+    "redoc": "^2.0.0-rc.40",
     "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.20.1",
@@ -77,8 +78,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "resolutions": {
-    "@types/react": "16.8.5",
-    "@types/react-dom": "16.8.2"
+    "@types/react": "16.9.3",
+    "@types/react-dom": "16.9.3"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",

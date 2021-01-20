@@ -618,10 +618,10 @@ func TestValidateDestination(t *testing.T) {
 		}
 
 		db := &dbmocks.ArgoDB{}
-		db.On("ListClusters", context.Background()).Return(nil, fmt.Errorf("an error occured"))
+		db.On("ListClusters", context.Background()).Return(nil, fmt.Errorf("an error occurred"))
 
 		err := ValidateDestination(context.Background(), &dest, db)
-		assert.Equal(t, "unable to find destination server: an error occured", err.Error())
+		assert.Equal(t, "unable to find destination server: an error occurred", err.Error())
 		assert.False(t, dest.IsServerInferred())
 	})
 
@@ -669,4 +669,43 @@ func TestValidateDestination(t *testing.T) {
 		assert.False(t, dest.IsServerInferred())
 	})
 
+}
+
+func TestFilterByName(t *testing.T) {
+	apps := []argoappv1.Application{
+		{
+			ObjectMeta: metav1.ObjectMeta{
+				Name: "foo",
+			},
+			Spec: argoappv1.ApplicationSpec{
+				Project: "fooproj",
+			},
+		},
+		{
+			ObjectMeta: metav1.ObjectMeta{
+				Name: "bar",
+			},
+			Spec: argoappv1.ApplicationSpec{
+				Project: "barproj",
+			},
+		},
+	}
+
+	t.Run("Name is empty string", func(t *testing.T) {
+		res, err := FilterByName(apps, "")
+		assert.NoError(t, err)
+		assert.Len(t, res, 2)
+	})
+
+	t.Run("Single app by name", func(t *testing.T) {
+		res, err := FilterByName(apps, "foo")
+		assert.NoError(t, err)
+		assert.Len(t, res, 1)
+	})
+
+	t.Run("No such app", func(t *testing.T) {
+		res, err := FilterByName(apps, "foobar")
+		assert.Error(t, err)
+		assert.Len(t, res, 0)
+	})
 }
